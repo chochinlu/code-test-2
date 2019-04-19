@@ -1,8 +1,8 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import AddFlightForm from './AddFlightForm';
 import Filter from './Filter';
-import Sort from './Sort';
-import Grid from '@material-ui/core/Grid';
+// import Sort from './Sort';
 
 const Actions = ({ classes }) => (
   <Grid container spacing={8}>
@@ -12,9 +12,9 @@ const Actions = ({ classes }) => (
     <Grid item xs={12}>
       <Filter />
     </Grid>
-    <Grid item xs={12}>
+    {/* <Grid item xs={12}>
       <Sort />
-    </Grid>
+    </Grid> */}
   </Grid>
 );
 export default Actions;

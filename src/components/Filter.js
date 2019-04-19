@@ -1,40 +1,27 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import classNames from 'classnames';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import ReplayIcon from '@material-ui/icons/Replay';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   paper: {
     padding: theme.spacing.unit
   },
-  formControl: {
-    margin: theme.spacing.unit
-  },
-  cabin: {
-    minWidth: 120
-  },
-  time: {
-    minWidth: 180
-  },
-  input: {
-    margin: theme.spacing.unit * 1.3,
-    maxWidth: 120
-  },
-  icon: {
-    margin: theme.spacing.unit * 2
+  button: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit
   }
 });
 
-const Filter = ({ classes }) => (
-  <Paper className={classes.paper}>
-    <FormControl className={classNames(classes.formControl, classes.cabin)}>
+const Filter = ({ classes }) => {
+  const cabinInput = (
+    <FormControl fullWidth>
       <InputLabel>Cabin</InputLabel>
       <Select>
         <MenuItem value="all">ALL</MenuItem>
@@ -42,9 +29,21 @@ const Filter = ({ classes }) => (
         <MenuItem value="business">BUSINESS</MenuItem>
       </Select>
     </FormControl>
-    <TextField label="From" margin="dense" className={classes.input} />
-    <TextField label="To" margin="dense" className={classes.input} />
-    <FormControl className={classNames(classes.formControl, classes.time)}>
+  );
+
+  const fromInput = (
+    <FormControl fullWidth>
+      <TextField label="From" margin="dense" />
+    </FormControl>
+  );
+  const toInput = (
+    <FormControl fullWidth>
+      <TextField label="To" margin="dense" />
+    </FormControl>
+  );
+
+  const departureTimeInput = (
+    <FormControl fullWidth>
       <InputLabel>Departure Time</InputLabel>
       <Select>
         <MenuItem value="1">Any Time</MenuItem>
@@ -56,7 +55,10 @@ const Filter = ({ classes }) => (
         <MenuItem value="3">Night (10-5a)</MenuItem>
       </Select>
     </FormControl>
-    <FormControl className={classNames(classes.formControl, classes.time)}>
+  );
+
+  const arrivalTimeInput = (
+    <FormControl fullWidth>
       <InputLabel>Arrival Time</InputLabel>
       <Select>
         <MenuItem value="1">Any Time</MenuItem>
@@ -68,9 +70,37 @@ const Filter = ({ classes }) => (
         <MenuItem value="3">Night (10-5a)</MenuItem>
       </Select>
     </FormControl>
-    <IconButton className={classes.icon}>
-      <ReplayIcon />
-    </IconButton>
-  </Paper>
-);
+  );
+
+  const resetButton = (
+    <Button variant="outlined" className={classes.button}>
+      Reset Filter
+    </Button>
+  );
+
+  return (
+    <Paper className={classes.paper}>
+      <Grid container spacing={8}>
+        <Grid item xs={12}>
+          {cabinInput}
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {fromInput}
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {toInput}
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {departureTimeInput}
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {arrivalTimeInput}
+        </Grid>
+        <Grid item container xs={12} justify="flex-end">
+          {resetButton}
+        </Grid>
+      </Grid>
+    </Paper>
+  );
+};
 export default withStyles(styles)(Filter);
