@@ -6,6 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = theme => ({
   paper: {
@@ -13,8 +14,15 @@ const styles = theme => ({
   }
 });
 
+const Progress = () => (
+  <div>
+    <LinearProgress />
+  </div>
+);
+
 const FlightTable = ({ classes }) => (
   <Paper className={classes.paper}>
+    {/* <Progress /> */}
     <Table>
       <TableHead>
         <TableRow>
