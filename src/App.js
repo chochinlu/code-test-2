@@ -22,11 +22,11 @@ class App extends Component {
         <Menu />
         <Information />
         <Grid container spacing={8} className={classes.row}>
-          <Grid item xs={12} sm={8}>
-            <FlightTable />
-          </Grid>
           <Grid item xs={12} sm={4}>
             <Actions />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <FlightTable />
           </Grid>
         </Grid>
       </div>
