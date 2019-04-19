@@ -13,7 +13,7 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit
   },
-  button: {
+  buttonRow: {
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit
   }
@@ -73,7 +73,7 @@ const Filter = ({ classes }) => {
   );
 
   const resetButton = (
-    <Button variant="outlined" className={classes.button}>
+    <Button variant="outlined" fullWidth className={classes.button}>
       Reset Filter
     </Button>
   );
@@ -96,8 +96,16 @@ const Filter = ({ classes }) => {
         <Grid item xs={12} sm={6}>
           {arrivalTimeInput}
         </Grid>
-        <Grid item container xs={12} justify="flex-end">
-          {resetButton}
+        <Grid
+          item
+          container
+          xs={12}
+          justify="flex-end"
+          className={classes.buttonRow}
+        >
+          <Grid item xs={12} sm={6}>
+            {resetButton}
+          </Grid>
         </Grid>
       </Grid>
     </Paper>
