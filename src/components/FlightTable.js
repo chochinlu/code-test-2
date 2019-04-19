@@ -1,13 +1,20 @@
 import React from 'react';
-// import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-const FlightTable = () => (
-  <div>
+const styles = theme => ({
+  paper: {
+    padding: theme.spacing.unit
+  }
+});
+
+const FlightTable = ({ classes }) => (
+  <Paper className={classes.paper}>
     <Table>
       <TableHead>
         <TableRow>
@@ -28,6 +35,6 @@ const FlightTable = () => (
     </Table>
 
     <p>paging</p>
-  </div>
+  </Paper>
 );
-export default FlightTable;
+export default withStyles(styles)(FlightTable);

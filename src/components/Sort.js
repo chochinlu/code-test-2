@@ -1,9 +1,17 @@
 import React from 'react';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 
-const Sort = () => (
-  <div>
-    <h2>Sort</h2>
+const styles = theme => ({
+  paper: {
+    padding: theme.spacing.unit
+  }
+});
+
+const Sort = ({ classes }) => (
+  <Paper className={classes.paper}>
+    <h2>Sort by</h2>
     <p>by price, by name, by time...</p>
-  </div>
+  </Paper>
 );
-export default Sort;
+export default withStyles(styles)(Sort);

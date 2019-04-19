@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,6 +11,9 @@ import IconButton from '@material-ui/core/IconButton';
 import ReplayIcon from '@material-ui/icons/Replay';
 
 const styles = theme => ({
+  paper: {
+    padding: theme.spacing.unit
+  },
   formControl: {
     margin: theme.spacing.unit
   },
@@ -29,7 +33,7 @@ const styles = theme => ({
 });
 
 const Filter = ({ classes }) => (
-  <div>
+  <Paper className={classes.paper}>
     <FormControl className={classNames(classes.formControl, classes.cabin)}>
       <InputLabel>Cabin</InputLabel>
       <Select>
@@ -67,6 +71,6 @@ const Filter = ({ classes }) => (
     <IconButton className={classes.icon}>
       <ReplayIcon />
     </IconButton>
-  </div>
+  </Paper>
 );
 export default withStyles(styles)(Filter);

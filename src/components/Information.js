@@ -84,19 +84,18 @@ const style = theme => ({
 });
 
 const Information = () => (
-  <div>
-    <Snackbar
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right'
-      }}
-      autoHideDuration={6000}
-    >
-      <FlightSnackbarContentWrapper
-        variant="success"
-        message="This is a success message!"
-      />
-    </Snackbar>
-  </div>
+  <Snackbar
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'right'
+    }}
+    autoHideDuration={6000}
+  >
+    <FlightSnackbarContentWrapper
+      variant="success"
+      message="This is a success message!"
+    />
+  </Snackbar>
 );
+
 export default withStyles(style)(Information);
