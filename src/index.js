@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
-
+import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 const theme = createMuiTheme({
@@ -13,9 +13,11 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    <App />
-  </MuiThemeProvider>,
+  <BrowserRouter>
+    <MuiThemeProvider theme={theme}>
+      <App />
+    </MuiThemeProvider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

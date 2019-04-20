@@ -87,43 +87,45 @@ const AddFlightForm = ({ classes }) => {
   );
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Paper className={classes.paper}>
-        <form>
-          <Grid container spacing={8}>
-            <Grid item xs={12}>
-              {cabinInput}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {fromInput}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {toInput}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {departureTimeInput}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {arrivalTimeInput}
-            </Grid>
-            <Grid
-              item
-              container
-              xs={12}
-              spacing={8}
-              className={classes.buttonRow}
-            >
-              <Grid item xs={12} sm={6}>
-                {clearButton}
+    <Grid item xs={12}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Paper className={classes.paper}>
+          <form>
+            <Grid container spacing={8}>
+              <Grid item xs={12}>
+                {cabinInput}
               </Grid>
               <Grid item xs={12} sm={6}>
-                {addButton}
+                {fromInput}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {toInput}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {departureTimeInput}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {arrivalTimeInput}
+              </Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                spacing={8}
+                className={classes.buttonRow}
+              >
+                <Grid item xs={12} sm={6}>
+                  {clearButton}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  {addButton}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </Paper>
-    </MuiPickersUtilsProvider>
+          </form>
+        </Paper>
+      </MuiPickersUtilsProvider>
+    </Grid>
   );
 };
 

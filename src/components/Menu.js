@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 import { format } from 'date-fns';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 const styles = theme => ({
   grow: {
@@ -15,16 +17,23 @@ const styles = theme => ({
 
 const dayFormat = today => format(today, 'EEE, MMM dd');
 
+const HomeLink = props => <RouterLink to="/" {...props} />;
+const AddLink = props => <RouterLink to="/add_flight" {...props} />;
+
 const Menu = ({ classes, today = new Date() }) => (
   <div className={classes.grow}>
     <AppBar position="static" color="default">
       <Toolbar>
-        <Typography variant="h6" color="inherit" className={classes.grow}>
-          Flight Table ({dayFormat(today)})
+        <Typography className={classes.grow}>
+          <Link component={HomeLink} underline="none" variant="h6">
+            Flight Table ({dayFormat(today)})
+          </Link>
         </Typography>
-        <IconButton aria-label="Add" color="primary">
-          <AddIcon />
-        </IconButton>
+        <Link component={AddLink}>
+          <IconButton aria-label="Add" color="primary">
+            <AddIcon />
+          </IconButton>
+        </Link>
       </Toolbar>
     </AppBar>
   </div>
