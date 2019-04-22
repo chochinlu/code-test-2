@@ -6,8 +6,8 @@ import { cabin } from '../constants';
 //   cabin, //string
 //   from,
 //   to,
-//   departure, // ms
-//   arrival // ms
+//   departureTime, // ms
+//   arrivalTime // ms
 // }
 
 // cheap flight data:

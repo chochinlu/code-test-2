@@ -12,6 +12,9 @@ import store from './redux/store';
 const theme = createMuiTheme({
   palette: {
     primary: blue
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 

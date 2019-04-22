@@ -4,19 +4,28 @@ import AddFlightForm from './AddFlightForm';
 import Filter from './Filter';
 // import Sort from './Sort';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Actions = ({ classes }) => {
+const Actions = ({ noFlights }) => {
   return (
     <Grid container spacing={8}>
       <Route path="/add_flight" component={AddFlightForm} />
 
-      <Grid item xs={12}>
-        <Filter />
-      </Grid>
+      {noFlights ? null : (
+        <Grid item xs={12}>
+          <Filter />
+        </Grid>
+      )}
+
       {/* <Grid item xs={12}>
         <Sort />
       </Grid> */}
     </Grid>
   );
 };
-export default Actions;
+
+function mapStateToProps(state) {
+  return { noFlights: state.flights.length === 0 };
+}
+
+export default connect(mapStateToProps)(Actions);

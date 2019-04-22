@@ -1,3 +1,5 @@
+import { convertCheapClass, convertBusinessClass } from './utils/converters';
+
 export const cheapFlightData = [
   {
     id: 4062210288638936064,
@@ -343,4 +345,9 @@ export const businessFlightData = [
     departure: '2019-04-18T02:37:14.342Z',
     arrival: '2019-04-18T05:09:15.008Z'
   }
+];
+
+export const convertedFligts = [
+  ...convertCheapClass(cheapFlightData),
+  ...convertBusinessClass(businessFlightData)
 ];
