@@ -25,7 +25,8 @@ const Actions = ({ noFlights }) => {
 };
 
 function mapStateToProps(state) {
-  return { noFlights: state.flights.length === 0 };
+  // return { noFlights: state.flights.length === 0 };
+  return { noFlights: false };
 }
 
 export default connect(mapStateToProps)(Actions);

@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import { cabinFilter, timeFilter } from '../constants';
 
 const styles = theme => ({
   paper: {
@@ -19,96 +20,152 @@ const styles = theme => ({
   }
 });
 
-const Filter = ({ classes }) => {
-  const cabinInput = (
-    <FormControl fullWidth>
-      <InputLabel>Cabin</InputLabel>
-      <Select>
-        <MenuItem value="all">ALL</MenuItem>
-        <MenuItem value="cheap">CHEAP</MenuItem>
-        <MenuItem value="business">BUSINESS</MenuItem>
-      </Select>
-    </FormControl>
-  );
+const CabinField = ({ title, name, value, onChange }) => (
+  <FormControl fullWidth>
+    <InputLabel>{title}</InputLabel>
+    <Select name={name} value={value} onChange={onChange}>
+      {Object.keys(cabinFilter).map(c => (
+        <MenuItem key={cabinFilter[c]} value={cabinFilter[c]}>
+          {c}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+);
 
-  const fromInput = (
-    <FormControl fullWidth>
-      <TextField label="From" margin="dense" />
-    </FormControl>
-  );
-  const toInput = (
-    <FormControl fullWidth>
-      <TextField label="To" margin="dense" />
-    </FormControl>
-  );
+const TimeField = ({ title, name, value, onChange }) => (
+  <FormControl fullWidth>
+    <InputLabel>{title}</InputLabel>
+    <Select name={name} value={value} onChange={onChange}>
+      {Object.keys(timeFilter).map(t => (
+        <MenuItem key={timeFilter[t].value} value={timeFilter[t].value}>
+          {timeFilter[t].text}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+);
 
-  const departureTimeInput = (
-    <FormControl fullWidth>
-      <InputLabel>Departure Time</InputLabel>
-      <Select>
-        <MenuItem value="1">Any Time</MenuItem>
-        <MenuItem value="2">Early Morning (5-7a)</MenuItem>
-        <MenuItem value="3">Morning (7-10a)</MenuItem>
-        <MenuItem value="3">Noon (10a-2p)</MenuItem>
-        <MenuItem value="3">Afternoon (2-6p)</MenuItem>
-        <MenuItem value="3">Evening (6-10p)</MenuItem>
-        <MenuItem value="3">Night (10-5a)</MenuItem>
-      </Select>
-    </FormControl>
-  );
+const initState = {
+  cabin: cabinFilter.ALL,
+  from: '',
+  to: '',
+  departureTime: timeFilter.ANY_TIME.value,
+  arrivalTime: timeFilter.ANY_TIME.value
+};
+class Filter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = initState;
+  }
 
-  const arrivalTimeInput = (
-    <FormControl fullWidth>
-      <InputLabel>Arrival Time</InputLabel>
-      <Select>
-        <MenuItem value="1">Any Time</MenuItem>
-        <MenuItem value="2">Early Morning (5-7a)</MenuItem>
-        <MenuItem value="3">Morning (7-10a)</MenuItem>
-        <MenuItem value="3">Noon (10a-2p)</MenuItem>
-        <MenuItem value="3">Afternoon (2-6p)</MenuItem>
-        <MenuItem value="3">Evening (6-10p)</MenuItem>
-        <MenuItem value="3">Night (10-5a)</MenuItem>
-      </Select>
-    </FormControl>
-  );
+  reset = e => {
+    e.preventDefault();
+    this.setState(initState);
+  };
 
-  const resetButton = (
-    <Button variant="outlined" fullWidth className={classes.button}>
-      Reset Filter
-    </Button>
-  );
+  handleInput = e => {
+    e.preventDefault();
+    const { name, value } = e.target;
 
-  return (
-    <Paper className={classes.paper}>
-      <Grid container spacing={8}>
-        <Grid item xs={12}>
-          {cabinInput}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {fromInput}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {toInput}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {departureTimeInput}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {arrivalTimeInput}
-        </Grid>
-        <Grid
-          item
-          container
-          xs={12}
-          justify="flex-end"
-          className={classes.buttonRow}
-        >
+    this.setState({ [name]: value });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const cabinInput = (
+      <CabinField
+        title="Cabin"
+        name="cabin"
+        value={this.state.cabin}
+        onChange={this.handleInput}
+      />
+    );
+
+    const fromInput = (
+      <FormControl fullWidth>
+        <TextField
+          label="From"
+          margin="dense"
+          name="from"
+          value={this.state.from}
+          onChange={this.handleInput}
+        />
+      </FormControl>
+    );
+    const toInput = (
+      <FormControl fullWidth>
+        <TextField
+          label="To"
+          margin="dense"
+          name="to"
+          value={this.state.to}
+          onChange={this.handleInput}
+        />
+      </FormControl>
+    );
+
+    const departureTimeInput = (
+      <TimeField
+        title="Departure Time"
+        name="departureTime"
+        value={this.state.departureTime}
+        onChange={this.handleInput}
+      />
+    );
+
+    const arrivalTimeInput = (
+      <TimeField
+        title="Arrival Time"
+        name="arrivalTime"
+        value={this.state.arrivalTime}
+        onChange={this.handleInput}
+      />
+    );
+
+    const resetButton = (
+      <Button
+        variant="outlined"
+        fullWidth
+        className={classes.button}
+        onClick={this.reset}
+      >
+        Reset Filter
+      </Button>
+    );
+
+    return (
+      <Paper className={classes.paper}>
+        <Grid container spacing={8}>
+          <Grid item xs={12}>
+            {cabinInput}
+          </Grid>
           <Grid item xs={12} sm={6}>
-            {resetButton}
+            {fromInput}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {toInput}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {departureTimeInput}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {arrivalTimeInput}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justify="flex-end"
+            className={classes.buttonRow}
+          >
+            <Grid item xs={12} sm={6}>
+              {resetButton}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Paper>
-  );
-};
+      </Paper>
+    );
+  }
+}
 export default withStyles(styles)(Filter);
