@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { format } from 'date-fns';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   grow: {
@@ -31,11 +32,21 @@ const Menu = ({ classes, today = new Date() }) => {
     <div className={classes.grow}>
       <AppBar position="static" color="default">
         <Toolbar>
-          <Typography className={classes.grow}>
-            <Link component={HomeLink} underline="none" variant="h6">
-              Flight Table ({dayFormat(today)})
-            </Link>
-          </Typography>
+          <Grid container justify="flex-start" alignItems="baseline">
+            <Grid item xs={5}>
+              <Typography>
+                <Link component={HomeLink} underline="none" variant="h6">
+                  Flight Table
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={7}>
+              <Typography variant="subtitle2">
+                {dayFormat(today)}, Asia/Taipei
+              </Typography>
+            </Grid>
+          </Grid>
+
           <Link component={toggle ? AddLink : HomeLink} onClick={handleToggle}>
             <IconButton aria-label="Add" color="primary">
               <AddIcon />
