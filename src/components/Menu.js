@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,12 +22,6 @@ const HomeLink = props => <RouterLink to="/" {...props} />;
 const AddLink = props => <RouterLink to="/add_flight" {...props} />;
 
 const Menu = ({ classes, today = new Date() }) => {
-  const [toggle, setToggle] = useState(false);
-
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
-
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="default">
@@ -47,7 +41,7 @@ const Menu = ({ classes, today = new Date() }) => {
             </Grid>
           </Grid>
 
-          <Link component={toggle ? AddLink : HomeLink} onClick={handleToggle}>
+          <Link component={AddLink}>
             <IconButton aria-label="Add" color="primary">
               <AddIcon />
             </IconButton>

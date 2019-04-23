@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
+import { convertMillisecondsToTime, duration } from '../utils/converters';
 
 import { convertedFligts } from '../data';
 
@@ -16,6 +17,12 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit,
     minHeight: '10vh'
+  },
+  total: {
+    paddingLeft: theme.spacing.unit * 2
+  },
+  span: {
+    paddingLeft: theme.spacing.unit
   }
 });
 
@@ -23,6 +30,15 @@ const Progress = () => (
   <div>
     <LinearProgress />
   </div>
+);
+
+const AirPortField = ({ classes, time, airport }) => (
+  <TableCell>
+    <Typography inline>{convertMillisecondsToTime(time)}</Typography>
+    <Typography inline variant="subtitle2" className={classes}>
+      {airport}
+    </Typography>
+  </TableCell>
 );
 
 const FlightTable = ({ classes, flights }) => {
@@ -36,6 +52,9 @@ const FlightTable = ({ classes, flights }) => {
   return (
     <Paper className={classes.paper}>
       {/* <Progress /> */}
+      <Typography variant="h6" className={classes.total}>
+        Total: {flights.length}
+      </Typography>
       <Table>
         <TableHead>
           <TableRow>
@@ -49,13 +68,17 @@ const FlightTable = ({ classes, flights }) => {
           {flights.map(f => (
             <TableRow key={f.id}>
               <TableCell>{f.cabin}</TableCell>
-              <TableCell>
-                {f.departureTime} {f.from}
-              </TableCell>
-              <TableCell>
-                {f.arrivalTime} {f.to}
-              </TableCell>
-              <TableCell>3 h 30 m</TableCell>
+              <AirPortField
+                classes={classes.span}
+                time={f.departureTime}
+                airport={f.from}
+              />
+              <AirPortField
+                classes={classes.span}
+                time={f.arrivalTime}
+                airport={f.to}
+              />
+              <TableCell>{duration(f.arrivalTime, f.departureTime)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

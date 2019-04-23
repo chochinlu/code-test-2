@@ -1,4 +1,6 @@
 import { cabin } from '../constants';
+import { format } from 'date-fns';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 
 // regular flight data
 // {
@@ -55,3 +57,8 @@ export const convertBusinessClassData = data => {
 
 export const convertBusinessClass = sourceArr =>
   sourceArr.map(data => convertBusinessClassData(data));
+
+export const convertMillisecondsToTime = milliseconds =>
+  format(new Date(milliseconds), 'HH:mm:ss a');
+
+export const duration = (time1, time2) => formatDistanceStrict(time2, time1);
