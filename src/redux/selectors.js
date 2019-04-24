@@ -1,4 +1,4 @@
-import { cabin, cabinFilter } from '../constants';
+import { cabin } from '../constants';
 
 const filterCabin = (flights, classCabin) => {
   switch (classCabin) {
@@ -11,10 +11,21 @@ const filterCabin = (flights, classCabin) => {
   }
 };
 
+const fliterFrom = (flights, from) => {
+  const re = new RegExp(from);
+  return flights.filter(f => re.test(f.from.toLowerCase()));
+};
+
+const fliterTo = (flights, to) => {
+  const re = new RegExp(to);
+  return flights.filter(f => re.test(f.to.toLowerCase()));
+};
+
 export const getFilteredFlights = ({ flights, filter }) => {
   let filteredFlights = filterCabin(flights, filter.cabin);
+  filteredFlights = fliterFrom(filteredFlights, filter.from);
+  filteredFlights = fliterTo(filteredFlights, filter.to);
 
-  // filter from
   // filter to
   // filter time
   return filteredFlights;
