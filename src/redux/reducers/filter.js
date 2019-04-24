@@ -1,4 +1,4 @@
-import { SET_FILTER } from '../actionTypes';
+import { SET_FILTER, RESET_FILTER } from '../actionTypes';
 import { cabinFilter, timeFilter } from '../../constants';
 
 const initialState = {
@@ -13,6 +13,8 @@ export default function(filters = initialState, action) {
   switch (action.type) {
     case SET_FILTER:
       return { ...filters, ...action.payload.filter };
+    case RESET_FILTER:
+      return initialState;
     default:
       return filters;
   }

@@ -4,7 +4,8 @@ import {
   GET_FLIGHTS_FAIL,
   SET_FLIGHTS,
   ADD_FLIGHT,
-  SET_FILTER
+  SET_FILTER,
+  RESET_FILTER
 } from './actionTypes';
 
 export const getFlights = cabin => ({
@@ -45,8 +46,12 @@ export const addFlight = flight => ({
 });
 
 export const setFilter = filter => ({
-  type: ADD_FLIGHT,
+  type: SET_FILTER,
   payload: {
     filter
   }
+});
+
+export const resetFilter = () => ({
+  type: RESET_FILTER
 });
