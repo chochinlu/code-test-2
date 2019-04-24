@@ -10,7 +10,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { convertMillisecondsToTime, duration } from '../utils/converters';
-
+import { getFilteredFlights } from '../redux/selectors';
 import { convertedFligts } from '../data';
 
 const styles = theme => ({
@@ -91,7 +91,12 @@ const FlightTable = ({ classes, flights }) => {
 
 function mapStateToProps(state) {
   // return { flights: state.flights };
-  return { flights: convertedFligts };
+  return {
+    flights: getFilteredFlights({
+      flights: convertedFligts,
+      filter: state.filter
+    })
+  };
 }
 
 const FlightTableWrapper = withStyles(styles)(FlightTable);
