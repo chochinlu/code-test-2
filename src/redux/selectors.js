@@ -1,4 +1,5 @@
-import { cabin } from '../constants';
+import { cabin, timeFilter } from '../constants';
+import { inDuration } from '../utils/date';
 
 const filterCabin = (flights, classCabin) => {
   switch (classCabin) {
@@ -21,13 +22,27 @@ const fliterTo = (flights, to) => {
   return flights.filter(f => re.test(f.to.toLowerCase()));
 };
 
+const filterDepartureTime = (flights, timeFilterValue) => {
+  if (timeFilterValue === timeFilter.ANY_TIME.value) {
+    return flights;
+  }
+  return flights.filter(f => inDuration(timeFilterValue, f.departureTime));
+};
+
+const filterArrivalTime = (flights, timeFilterValue) => {
+  if (timeFilterValue === timeFilter.ANY_TIME.value) {
+    return flights;
+  }
+  return flights.filter(f => inDuration(timeFilterValue, f.arrivalTime));
+};
+
 export const getFilteredFlights = ({ flights, filter }) => {
   let filteredFlights = filterCabin(flights, filter.cabin);
+
   filteredFlights = fliterFrom(filteredFlights, filter.from);
   filteredFlights = fliterTo(filteredFlights, filter.to);
+  filteredFlights = filterDepartureTime(filteredFlights, filter.departureTime);
+  filteredFlights = filterArrivalTime(filteredFlights, filter.arrivalTime);
 
-  console.log({ flight: flights[0] });
-  // filter to
-  // filter time
   return filteredFlights;
 };

@@ -119,7 +119,6 @@ const Filter = props => {
     <TimeField
       input={timeInput.departureTime}
       filters={filters}
-      // value={filters.departureTime}
       onChange={handleInput}
     />
   );
@@ -128,7 +127,6 @@ const Filter = props => {
     <TimeField
       input={timeInput.arrivalTime}
       filters={filters}
-      // value={filters.arrivalTime}
       onChange={handleInput}
     />
   );
