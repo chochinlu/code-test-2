@@ -9,7 +9,9 @@ import Actions from './components/Actions';
 
 const styles = theme => ({
   row: {
-    padding: theme.spacing.unit
+    padding: theme.spacing.unit,
+    maxWidth: '80rem',
+    margin: '0 auto'
   }
 });
 
