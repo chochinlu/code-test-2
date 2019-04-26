@@ -26,26 +26,38 @@ export const timeFilter = {
   },
   EARLY_MORNING: {
     value: 2,
-    text: 'Early Morning (5-7a)'
+    text: 'Early Morning (5-7a)',
+    fromHour: 5,
+    hourDuration: 2
   },
   MORNING: {
     value: 3,
-    text: 'Morning (7-10a)'
+    text: 'Morning (7-10a)',
+    fromHour: 7,
+    hourDuration: 3
   },
   NOON: {
     value: 4,
-    text: 'Noon (10a-2p)'
+    text: 'Noon (10a-2p)',
+    fromHour: 10,
+    hourDuration: 4
   },
   AFTERNOON: {
     value: 5,
-    text: 'Afternoon (2-6p)'
+    text: 'Afternoon (2-6p)',
+    fromHour: 14,
+    hourDuration: 4
   },
   EVENING: {
     value: 6,
-    text: 'Evening (6-10p)'
+    text: 'Evening (6-10p)',
+    fromHour: 16,
+    hourDuration: 4
   },
   NIGHT: {
     value: 7,
-    text: 'Night (10-5a)'
+    text: 'Night (10-5a)',
+    fromHour: 22,
+    hourDuration: 7
   }
 };

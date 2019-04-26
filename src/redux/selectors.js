@@ -26,6 +26,7 @@ export const getFilteredFlights = ({ flights, filter }) => {
   filteredFlights = fliterFrom(filteredFlights, filter.from);
   filteredFlights = fliterTo(filteredFlights, filter.to);
 
+  console.log({ flight: flights[0] });
   // filter to
   // filter time
   return filteredFlights;
