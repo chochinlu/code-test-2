@@ -8,6 +8,17 @@ export const cabinFilter = {
   ...cabin
 };
 
+export const timeInput = {
+  departureTime: {
+    name: 'departureTime',
+    title: 'Departure Time'
+  },
+  arrivalTime: {
+    name: 'arrivalTime',
+    title: 'Arrival Time'
+  }
+};
+
 export const timeFilter = {
   ANY_TIME: {
     value: 1,

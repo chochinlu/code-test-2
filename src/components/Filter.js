@@ -10,7 +10,8 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { cabinFilter, timeFilter } from '../constants';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import { timeInput, cabinFilter, timeFilter } from '../constants';
 
 const styles = theme => ({
   paper: {
@@ -35,18 +36,37 @@ const CabinField = ({ title, name, value, onChange }) => (
   </FormControl>
 );
 
-const TimeField = ({ title, name, value, onChange }) => (
-  <FormControl fullWidth>
-    <InputLabel>{title}</InputLabel>
-    <Select name={name} value={value} onChange={onChange}>
-      {Object.keys(timeFilter).map(t => (
-        <MenuItem key={timeFilter[t].value} value={timeFilter[t].value}>
-          {timeFilter[t].text}
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
-);
+const TimeField = ({ input, filters, onChange }) => {
+  const hasError =
+    input.name === timeInput.arrivalTime.name &&
+    filters.arrivalTime !== timeFilter.ANY_TIME.value &&
+    filters.arrivalTime < filters.departureTime;
+
+  const value =
+    input.name === timeInput.departureTime.name
+      ? filters.departureTime
+      : filters.arrivalTime;
+
+  const errMsg = `${timeInput.arrivalTime.title} should be larger than ${
+    timeInput.departureTime.title
+  }.`;
+
+  return (
+    <FormControl fullWidth error={hasError}>
+      <InputLabel>{input.title}</InputLabel>
+      <Select name={input.name} value={value} onChange={onChange}>
+        {Object.keys(timeFilter).map(t => (
+          <MenuItem key={timeFilter[t].value} value={timeFilter[t].value}>
+            {timeFilter[t].text}
+          </MenuItem>
+        ))}
+      </Select>
+      {hasError && input.name === timeInput.arrivalTime.name && (
+        <FormHelperText>{errMsg}</FormHelperText>
+      )}
+    </FormControl>
+  );
+};
 
 const Filter = props => {
   const reset = e => {
@@ -97,18 +117,18 @@ const Filter = props => {
 
   const departureTimeInput = (
     <TimeField
-      title="Departure Time"
-      name="departureTime"
-      value={filters.departureTime}
+      input={timeInput.departureTime}
+      filters={filters}
+      // value={filters.departureTime}
       onChange={handleInput}
     />
   );
 
   const arrivalTimeInput = (
     <TimeField
-      title="Arrival Time"
-      name="arrivalTime"
-      value={filters.arrivalTime}
+      input={timeInput.arrivalTime}
+      filters={filters}
+      // value={filters.arrivalTime}
       onChange={handleInput}
     />
   );
