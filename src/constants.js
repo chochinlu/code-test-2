@@ -61,3 +61,30 @@ export const timeFilter = {
     hourDuration: 7
   }
 };
+
+export const orderType = {
+  CABIN: {
+    name: 'cabin',
+    title: 'Cabin',
+    orderable: true
+  },
+  DEPARTURE_TIME: {
+    name: 'departureTime',
+    title: 'Departure',
+    orderable: true
+  },
+  ARRIVAL_TIME: {
+    name: 'arrivalTime',
+    title: 'Arrival',
+    orderable: true
+  }
+};
+
+export const flightTableHead = {
+  ...orderType,
+  FLIGHT_TIME: {
+    name: 'filghtTime',
+    title: 'Flight Time',
+    orderable: false
+  }
+};

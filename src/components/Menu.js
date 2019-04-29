@@ -24,7 +24,7 @@ const AddLink = props => <RouterLink to="/add_flight" {...props} />;
 const Menu = ({ classes, today = new Date() }) => {
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="default" elevation={1}>
         <Toolbar>
           <Grid container justify="flex-start" alignItems="baseline">
             <Grid item xs={5}>

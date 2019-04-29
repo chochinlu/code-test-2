@@ -5,7 +5,8 @@ import {
   SET_FLIGHTS,
   ADD_FLIGHT,
   SET_FILTER,
-  RESET_FILTER
+  RESET_FILTER,
+  SET_ORDER
 } from './actionTypes';
 
 export const getFlights = cabin => ({
@@ -54,4 +55,11 @@ export const setFilter = filter => ({
 
 export const resetFilter = () => ({
   type: RESET_FILTER
+});
+
+export const setOrder = property => ({
+  type: SET_ORDER,
+  payload: {
+    property
+  }
 });

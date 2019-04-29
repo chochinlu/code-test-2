@@ -6,12 +6,15 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { convertMillisecondsToTime, duration } from '../utils/converters';
 import { getFilteredFlights } from '../redux/selectors';
 import { convertedFligts } from '../data';
+import { setOrder } from '../redux/actions';
+import { flightTableHead } from '../constants';
 
 const styles = theme => ({
   paper: {
@@ -41,7 +44,31 @@ const AirPortField = ({ classes, time, airport }) => (
   </TableCell>
 );
 
-const FlightTable = ({ classes, flights }) => {
+const FlightTableHead = ({ sort, setOrder }) => (
+  <TableHead>
+    <TableRow>
+      {Object.keys(flightTableHead).map(t => (
+        <TableCell key={flightTableHead[t].name}>
+          {flightTableHead[t].orderable ? (
+            <>
+              <TableSortLabel
+                direction={sort.order}
+                active={flightTableHead[t].name === sort.orderBy}
+                onClick={() => setOrder(flightTableHead[t].name)}
+              >
+                {flightTableHead[t].title}
+              </TableSortLabel>
+            </>
+          ) : (
+            <>{flightTableHead[t].title}</>
+          )}
+        </TableCell>
+      ))}
+    </TableRow>
+  </TableHead>
+);
+
+const FlightTable = ({ classes, flights, sort, setOrder }) => {
   if (flights.length === 0)
     return (
       <Paper className={classes.paper}>
@@ -56,14 +83,7 @@ const FlightTable = ({ classes, flights }) => {
         Total: {flights.length}
       </Typography>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Cabin</TableCell>
-            <TableCell>Departure</TableCell>
-            <TableCell>Arrival</TableCell>
-            <TableCell>Flight Time</TableCell>
-          </TableRow>
-        </TableHead>
+        <FlightTableHead sort={sort} setOrder={setOrder} />
         <TableBody>
           {flights.map(f => (
             <TableRow key={f.id}>
@@ -95,10 +115,14 @@ function mapStateToProps(state) {
     flights: getFilteredFlights({
       flights: convertedFligts,
       filter: state.filter
-    })
+    }),
+    sort: state.sort
   };
 }
 
 const FlightTableWrapper = withStyles(styles)(FlightTable);
 
-export default connect(mapStateToProps)(FlightTableWrapper);
+export default connect(
+  mapStateToProps,
+  { setOrder }
+)(FlightTableWrapper);
