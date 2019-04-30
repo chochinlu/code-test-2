@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   grow: {
@@ -42,9 +43,11 @@ const Menu = ({ classes, today = new Date() }) => {
           </Grid>
 
           <Link component={AddLink}>
-            <IconButton aria-label="Add" color="primary">
-              <AddIcon />
-            </IconButton>
+            <Tooltip title="Add" aria-label="Add">
+              <IconButton aria-label="Add" color="primary">
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
           </Link>
         </Toolbar>
       </AppBar>

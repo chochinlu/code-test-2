@@ -2,7 +2,7 @@ import { SET_ORDER } from '../actionTypes';
 import { orderType } from '../../constants';
 
 const initialState = {
-  orderBy: orderType.CABIN.name,
+  orderBy: orderType.DEPARTURE_TIME.name,
   order: 'asc'
 };
 
