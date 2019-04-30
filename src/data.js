@@ -351,3 +351,8 @@ export const convertedFligts = [
   ...convertCheapClass(cheapFlightData),
   ...convertBusinessClass(businessFlightData)
 ];
+
+export const smallConvertedFligts = [
+  ...convertCheapClass(cheapFlightData.slice(0, 1)),
+  ...convertBusinessClass(businessFlightData.slice(0, 2))
+];

@@ -11,7 +11,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { convertMillisecondsToTime, duration } from '../utils/converters';
-import { getFilteredFlights } from '../redux/selectors';
+import { getTargetFlights } from '../redux/selectors';
 import { convertedFligts } from '../data';
 import { setOrder } from '../redux/actions';
 import { flightTableHead } from '../constants';
@@ -112,9 +112,10 @@ const FlightTable = ({ classes, flights, sort, setOrder }) => {
 function mapStateToProps(state) {
   // return { flights: state.flights };
   return {
-    flights: getFilteredFlights({
+    flights: getTargetFlights({
       flights: convertedFligts,
-      filter: state.filter
+      filter: state.filter,
+      sort: state.sort
     }),
     sort: state.sort
   };
