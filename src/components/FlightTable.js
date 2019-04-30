@@ -10,6 +10,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import { convertMillisecondsToTime, duration } from '../utils/converters';
 import { getTargetFlights } from '../redux/selectors';
 import { convertedFligts } from '../data';
@@ -51,13 +52,15 @@ const FlightTableHead = ({ sort, setOrder }) => (
         <TableCell key={flightTableHead[t].name}>
           {flightTableHead[t].orderable ? (
             <>
-              <TableSortLabel
-                direction={sort.order}
-                active={flightTableHead[t].name === sort.orderBy}
-                onClick={() => setOrder(flightTableHead[t].name)}
-              >
-                {flightTableHead[t].title}
-              </TableSortLabel>
+              <Tooltip title="Sort" aria-label="Sort" enterDelay={300}>
+                <TableSortLabel
+                  direction={sort.order}
+                  active={flightTableHead[t].name === sort.orderBy}
+                  onClick={() => setOrder(flightTableHead[t].name)}
+                >
+                  {flightTableHead[t].title}
+                </TableSortLabel>
+              </Tooltip>
             </>
           ) : (
             <>{flightTableHead[t].title}</>
@@ -82,7 +85,7 @@ const FlightTable = ({ classes, flights, sort, setOrder }) => {
       <Typography variant="h6" className={classes.total}>
         Total: {flights.length}
       </Typography>
-      <Table>
+      <Table padding="dense">
         <FlightTableHead sort={sort} setOrder={setOrder} />
         <TableBody>
           {flights.map(f => (
