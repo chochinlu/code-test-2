@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -7,6 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableFooter from '@material-ui/core/TableFooter';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +18,7 @@ import { getTargetFlights } from '../redux/selectors';
 import { convertedFligts } from '../data';
 import { setOrder } from '../redux/actions';
 import { flightTableHead } from '../constants';
+import TablePaginationActionsWrapped from './TablePaginationActions';
 
 const styles = theme => ({
   paper: {
@@ -72,6 +75,18 @@ const FlightTableHead = ({ sort, setOrder }) => (
 );
 
 const FlightTable = ({ classes, flights, sort, setOrder }) => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleSetPage = (event, page) => {
+    setPage(page);
+  };
+
+  const handleChangeRowsPerPage = e => {
+    setPage(0);
+    setRowsPerPage(e.target.value);
+  };
+
   if (flights.length === 0)
     return (
       <Paper className={classes.paper}>
@@ -88,26 +103,45 @@ const FlightTable = ({ classes, flights, sort, setOrder }) => {
       <Table padding="dense">
         <FlightTableHead sort={sort} setOrder={setOrder} />
         <TableBody>
-          {flights.map(f => (
-            <TableRow key={f.id}>
-              <TableCell>{f.cabin}</TableCell>
-              <AirPortField
-                classes={classes.span}
-                time={f.departureTime}
-                airport={f.from}
-              />
-              <AirPortField
-                classes={classes.span}
-                time={f.arrivalTime}
-                airport={f.to}
-              />
-              <TableCell>{duration(f.arrivalTime, f.departureTime)}</TableCell>
-            </TableRow>
-          ))}
+          {flights
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map(f => (
+              <TableRow key={f.id}>
+                <TableCell>{f.cabin}</TableCell>
+                <AirPortField
+                  classes={classes.span}
+                  time={f.departureTime}
+                  airport={f.from}
+                />
+                <AirPortField
+                  classes={classes.span}
+                  time={f.arrivalTime}
+                  airport={f.to}
+                />
+                <TableCell>
+                  {duration(f.arrivalTime, f.departureTime)}
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 12, 15, 25]}
+              colSpan={3}
+              count={flights.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              SelectProps={{
+                native: true
+              }}
+              onChangePage={handleSetPage}
+              onChangeRowsPerPage={e => handleChangeRowsPerPage(e)}
+              ActionsComponent={TablePaginationActionsWrapped}
+            />
+          </TableRow>
+        </TableFooter>
       </Table>
-
-      <p>paging</p>
     </Paper>
   );
 };
