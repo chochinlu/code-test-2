@@ -2,7 +2,7 @@ import { FETCHING } from '../actionTypes';
 import { cabin } from '../../constants';
 
 const initialState = Object.keys(cabin)
-  .map(k => ({ [k]: false }))
+  .map(k => ({ [cabin[k]]: false }))
   .reduce((a, b) => ({ ...a, ...b }), {});
 
 export default function(fetching = initialState, action) {

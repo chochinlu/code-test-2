@@ -1,6 +1,8 @@
 import { ADD_FLIGHT, SET_FLIGHTS } from '../actionTypes';
+import { convertedFligts } from '../../data';
 
-const initialState = [];
+// const initialState = [];
+const initialState = convertedFligts; // temporary
 
 export default function(flights = initialState, action) {
   switch (action.type) {

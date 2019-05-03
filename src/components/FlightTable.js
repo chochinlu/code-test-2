@@ -15,9 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import { convertMillisecondsToTime, duration } from '../utils/converters';
 import { getTargetFlights } from '../redux/selectors';
-import { convertedFligts } from '../data';
 import { setOrder } from '../redux/actions';
-import { flightTableHead } from '../constants';
+import { cabin, flightTableHead } from '../constants';
 import TablePaginationActionsWrapped from './TablePaginationActions';
 
 const styles = theme => ({
@@ -74,9 +73,9 @@ const FlightTableHead = ({ sort, setOrder }) => (
   </TableHead>
 );
 
-const FlightTable = ({ classes, flights, sort, setOrder }) => {
+const FlightTable = ({ classes, fetching, flights, sort, setOrder }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleSetPage = (event, page) => {
     setPage(page);
@@ -96,7 +95,8 @@ const FlightTable = ({ classes, flights, sort, setOrder }) => {
 
   return (
     <Paper className={classes.paper}>
-      {/* <Progress /> */}
+      {fetching[cabin.CHEAP] && <Progress />}
+      {fetching[cabin.BUSINESS] && <Progress />}
       <Typography variant="h6" className={classes.total}>
         Total: {flights.length}
       </Typography>
@@ -150,11 +150,12 @@ function mapStateToProps(state) {
   // return { flights: state.flights };
   return {
     flights: getTargetFlights({
-      flights: convertedFligts,
+      flights: state.flights,
       filter: state.filter,
       sort: state.sort
     }),
-    sort: state.sort
+    sort: state.sort,
+    fetching: state.fetching
   };
 }
 

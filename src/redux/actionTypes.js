@@ -1,4 +1,4 @@
-export const GET_FLIGHTS = 'GET_CHEAP_FLIGHTS';
+export const GET_FLIGHTS = 'GET_FLIGHTS';
 export const FETCHING = 'FETCHING';
 
 export const GET_FLIGHTS_FAIL = 'GET_FLIGHTS_FAIL';
