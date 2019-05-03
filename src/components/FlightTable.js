@@ -83,7 +83,7 @@ const FlightTable = ({ classes, fetching, flights, sort, setOrder }) => {
 
   const handleChangeRowsPerPage = e => {
     setPage(0);
-    setRowsPerPage(e.target.value);
+    setRowsPerPage(parseInt(e.target.value, 10));
   };
 
   if (flights.length === 0)

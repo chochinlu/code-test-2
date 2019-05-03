@@ -31,7 +31,6 @@ const TablePaginationActions = ({
   };
 
   const handleNextButtonClick = e => {
-    console.log('hi');
     onChangePage(e, page + 1);
   };
 
