@@ -8,6 +8,17 @@ export const cabinFilter = {
   ...cabin
 };
 
+export const airportInput = {
+  from: {
+    name: 'from',
+    title: 'From'
+  },
+  to: {
+    name: 'to',
+    title: 'To'
+  }
+};
+
 export const timeInput = {
   departureTime: {
     name: 'departureTime',
