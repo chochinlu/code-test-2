@@ -47,3 +47,5 @@ We are happy to see if you can use following frameworks and approaches:
 - [ ] D
 - [x] formik
 - [x] yup
+
+Sample fligt data: [data.js](./data.js).

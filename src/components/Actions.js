@@ -2,7 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import AddFlightForm from './AddFlightForm';
 import Filter from './Filter';
-// import Sort from './Sort';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -16,17 +15,12 @@ const Actions = ({ noFlights }) => {
           <Filter />
         </Grid>
       )}
-
-      {/* <Grid item xs={12}>
-        <Sort />
-      </Grid> */}
     </Grid>
   );
 };
 
 function mapStateToProps(state) {
-  // return { noFlights: state.flights.length === 0 };
-  return { noFlights: false };
+  return { noFlights: state.flights.length === 0 };
 }
 
 export default connect(mapStateToProps)(Actions);
