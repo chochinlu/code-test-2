@@ -20,8 +20,8 @@ const styles = theme => ({
 
 const App = ({ classes, getFlights }) => {
   useEffect(() => {
-    getFlights(cabin.CHEAP);
-    getFlights(cabin.BUSINESS);
+    // getFlights(cabin.CHEAP);
+    // getFlights(cabin.BUSINESS);
   });
 
   return (

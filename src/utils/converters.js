@@ -40,7 +40,7 @@ export const convertCheapClass = sourceArr =>
 //   arrival: '2019-04-18T06:05:35.675Z'
 // }
 
-const getTime = utcStr => new Date(utcStr).getTime();
+export const getTime = utcStr => new Date(utcStr).getTime();
 
 export const convertBusinessClassData = data => {
   const [from, to] = data.flight.split('->').map(e => e.trim());
