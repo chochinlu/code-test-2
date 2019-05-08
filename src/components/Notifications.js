@@ -53,7 +53,8 @@ const InfoSnakBar = ({ classes, msg }) => {
         horizontal: 'center'
       }}
       open={open}
-      autoHideDuration={6000}
+      autoHideDuration={4000}
+      onClose={() => setOpen(false)}
     >
       <SnackbarContent
         // className={classes.info}
