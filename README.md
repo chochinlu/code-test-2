@@ -48,4 +48,4 @@ We are happy to see if you can use following frameworks and approaches:
 - [x] formik
 - [x] yup
 
-Sample fligt data: [data.js](./data.js).
+Sample fligt data: [data.js](./src/data.js).
