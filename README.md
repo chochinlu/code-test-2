@@ -7,7 +7,7 @@
 The task is to create a CRUD product page that search over available flights.
 There are two available flight’s providers REST APIs.
 
-### Requirements:
+### Requirements
 
 1- Page should aggregate return flights from both providers. Do remember about sorting, filtering and pagination.
 
@@ -22,7 +22,7 @@ We are expecting you to use following frameworks:
 - [ ] Lodash
 - [x] Axios
 - [x] Unit tests for Components by using JEST
-- [ ]Unit tests for Components by using Enzyme
+- [ ] Unit tests for Components by using Enzyme
 
 We are happy to see if you can use following frameworks and approaches:
 
@@ -33,3 +33,17 @@ We are happy to see if you can use following frameworks and approaches:
 - [ ] ImmutableJS
 - [ ] Async-Loader
 - [ ] PWA approach
+
+## This version
+
+- [x] aggregate flight data
+- [x] sorting
+- [x] filtering
+- [x] pagination
+- [x] add flight form
+- [x] C
+- [ ] R
+- [ ] U
+- [ ] D
+- [x] formik
+- [x] yup
