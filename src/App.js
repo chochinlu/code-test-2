@@ -29,7 +29,7 @@ const App = ({ classes, getFlights }) => {
       <CssBaseline />
       <Menu />
       <Notifications />
-      <Grid container spacing={8} className={classes.row}>
+      <Grid container spacing={4} className={classes.row}>
         <Grid item xs={12} sm={4}>
           <Actions />
         </Grid>

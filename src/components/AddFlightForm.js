@@ -138,7 +138,7 @@ const AddFlightForm = ({ classes, addFlight }) => (
           }}
           render={props => (
             <Form>
-              <Grid container spacing={8}>
+              <Grid container spacing={4}>
                 <Grid item xs={12}>
                   <CabinInput
                     hasError={props.errors.cabin && props.errors.cabin !== ''}
@@ -197,7 +197,7 @@ const AddFlightForm = ({ classes, addFlight }) => (
                   item
                   container
                   xs={12}
-                  spacing={8}
+                  spacing={4}
                   className={classes.buttonRow}
                 >
                   <Grid item xs={12} sm={6}>

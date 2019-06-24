@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 const Actions = ({ noFlights }) => {
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={4}>
       <Route path="/add_flight" component={AddFlightForm} />
 
       {noFlights ? null : (

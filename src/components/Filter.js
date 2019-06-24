@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   buttonRow: {
     marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing.unit * 4
   }
 });
 
@@ -144,7 +144,7 @@ const Filter = props => {
 
   return (
     <Paper className={classes.paper}>
-      <Grid container spacing={8}>
+      <Grid container spacing={4}>
         <Grid item xs={12}>
           {cabinInput}
         </Grid>

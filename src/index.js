@@ -10,6 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
 
 const theme = createMuiTheme({
+  spacing: 4,
   palette: {
     primary: blue
   },
